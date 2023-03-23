@@ -1,4 +1,4 @@
-package org.example.math;
+package com.fish.math;
 
 import java.util.ArrayList;
 import java.util.Arrays;
