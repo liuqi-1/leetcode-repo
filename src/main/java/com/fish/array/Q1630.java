@@ -1,4 +1,4 @@
-package com.fish.math;
+package com.fish.array;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,6 +7,8 @@ import java.util.List;
 /**
  * @author liuqi
  * @date 2023/3/23
+ *
+ * https://leetcode.cn/problems/arithmetic-subarrays/
  */
 public class Q1630 {
     class Solution {
