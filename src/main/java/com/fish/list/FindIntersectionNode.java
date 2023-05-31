@@ -3,6 +3,8 @@ package com.fish.list;
 /**
  * @author liuqi
  * @date 2023/5/29
+ * <p>
+ * https://leetcode.cn/leetbook/read/tencent/x52ycv/
  */
 public class FindIntersectionNode {
     class ListNode {
