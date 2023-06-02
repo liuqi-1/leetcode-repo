@@ -1,4 +1,4 @@
-package com.fish.array;
+package com.fish.search;
 
 import java.util.Arrays;
 
@@ -13,8 +13,6 @@ import java.util.Arrays;
  * 返回礼盒的 最大 甜蜜度。
  */
 public class Q2517 {
-
-
     /**
      * 不会做，看的题解。
      * todo 求最小值最大或者求最大值最小，首先考虑是否可以二分
