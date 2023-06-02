@@ -26,7 +26,7 @@ public class CycleList {
     }
 
 
-    //    快慢指针
+    //    快慢指针.txt
     public class Solution {
         public boolean hasCycle(ListNode head) {
             if (head == null || head.next == null) {
