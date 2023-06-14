@@ -1,4 +1,4 @@
-package com.fish.sort;
+package com.fish.search;
 
 import org.junit.jupiter.api.Test;
 
