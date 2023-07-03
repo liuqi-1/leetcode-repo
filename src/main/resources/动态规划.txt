@@ -31,3 +31,4 @@ DP的无后效性：为了保证计算子问题能够按照顺序、不重复地
 
 
 例题：Q1262、Q1595(状压)、Qx5vk4t、Qx5w3sr、Qx5dugs、Qx507kd、Q1186
+    Qx5g7mg、Qx5zwpv
