@@ -43,7 +43,6 @@ public class Q2 {
                 sum = l1.val + r;
                 l1.val = sum % 10;
                 r = sum / 10;
-                l1.val %= 10;
                 if (l1.next == null && r != 0) {
                     l1.next = new ListNode();
                 }
