@@ -40,10 +40,59 @@ public class Qx5txi7 {
         }
     }
 
-    //  todo 手动实现优先队列
+    //  手动实现优先队列
     class Solution2 {
+        int heapSize = 0;
+        int[] data;
+
         public int findKthLargest(int[] nums, int k) {
-            return -2;
+            data = new int[nums.length + 1];
+            for (int num : nums) {
+                add(num);
+                if (heapSize > k) {
+                    poll();
+                }
+            }
+            return poll();
+        }
+
+        public void add(int num) {
+            heapSize++;
+            data[heapSize] = num;
+            int idx = heapSize;
+            while (idx > 1 && data[idx / 2] > data[idx]) {
+                swap(idx, idx / 2);
+                idx /= 2;
+            }
+        }
+
+        public int poll() {
+            int res = data[1];
+            data[1] = data[heapSize--];
+            maxHeapify(1);
+            return res;
+        }
+
+        public void maxHeapify(int idx) {
+            int smallestIdx = idx;
+            int l = idx * 2;
+            int r = idx * 2 + 1;
+            if (l <= heapSize && data[l] < data[idx]) {
+                smallestIdx = l;
+            }
+            if (r <= heapSize && data[r] < data[smallestIdx]) {
+                smallestIdx = r;
+            }
+            if (smallestIdx != idx) {
+                swap(idx, smallestIdx);
+                maxHeapify(smallestIdx);
+            }
+        }
+
+        public void swap(int i1, int i2) {
+            int t = data[i1];
+            data[i1] = data[i2];
+            data[i2] = t;
         }
     }
 
