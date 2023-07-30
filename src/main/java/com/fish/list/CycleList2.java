@@ -26,6 +26,9 @@ public class CycleList2 {
         }
     }
 
+    /**
+     * 20230730重做，画图即可理解，分为a,b,c三段，然后快慢指针走过的距离为两倍关系
+     */
     public class Solution {
         public ListNode detectCycle(ListNode head) {
             ListNode slow = head;
@@ -45,6 +48,7 @@ public class CycleList2 {
             return null;
         }
     }
+
 
 //    常规解法，O(n)空间
 /*    public class Solution {
