@@ -1,14 +1,12 @@
 package com.fish.dp;
 
 /**
- * 同UniquePaths
- *
  * @author liuqi
- * @date 2023/7/3
+ * @date 2023/8/4
  * <p>
- * https://leetcode.cn/leetbook/read/tencent/x5g7mg/
+ * https://leetcode.cn/problems/unique-paths/
  */
-public class Qx5g7mg {
+public class UniquePaths {
     class Solution {
         public int uniquePaths(int m, int n) {
             int[][] dp = new int[m][n];
