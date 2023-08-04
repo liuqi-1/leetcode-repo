@@ -16,7 +16,7 @@ public class UniquePaths3 {
         int pathNodeCnt;// 空节点数
         int m, n;// 矩阵大小
         int result; // 结果
-
+        int[][] grid;
         private boolean[][] visited;
 
         /**
@@ -25,11 +25,25 @@ public class UniquePaths3 {
          * @param x
          * @param y
          */
-        private void dfs(int x, int y) {
-            
+        private void dfs(int x, int y, int cnt) {
+            if (x < 0 || x >= m || y < 0 || y >= n || grid[x][y] == -1 || visited[x][y]) {
+                return;
+            }
+            if (grid[x][y] == 2) {
+                result += (cnt == pathNodeCnt + 1) ? 1 : 0;
+                return;
+            }
+            visited[x][y] = true;
+            cnt++;
+            dfs(x - 1, y, cnt);
+            dfs(x + 1, y, cnt);
+            dfs(x, y + 1, cnt);
+            dfs(x, y - 1, cnt);
+            visited[x][y] = false;
         }
 
         public int uniquePathsIII(int[][] grid) {
+            this.grid = grid;
             m = grid.length;
             n = grid[0].length;
             visited = new boolean[m][n];
@@ -48,7 +62,7 @@ public class UniquePaths3 {
                 }
             }
             // 开始深搜
-            dfs(startX, startY);
+            dfs(startX, startY, 0);
             return result;
         }
     }
