@@ -1,4 +1,4 @@
-package com.fish;
+package com.fish.map;
 
 import org.junit.jupiter.api.Test;
 
