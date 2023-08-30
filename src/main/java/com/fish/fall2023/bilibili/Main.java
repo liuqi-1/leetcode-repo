@@ -1,4 +1,4 @@
-package com.fish.bilibili2023;
+package com.fish.fall2023.bilibili;
 
 import java.util.Scanner;
 
