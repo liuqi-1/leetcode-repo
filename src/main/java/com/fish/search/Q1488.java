@@ -1,4 +1,4 @@
-package com.fish;
+package com.fish.search;
 
 import java.util.*;
 
