@@ -1,4 +1,4 @@
-package com.fish.bitcal;
+package com.fish.bitcalculate;
 
 /**
  * @author liuqi
