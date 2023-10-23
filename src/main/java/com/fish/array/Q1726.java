@@ -1,4 +1,4 @@
-package com.fish;
+package com.fish.array;
 
 import java.util.*;
 import java.util.stream.Collectors;
