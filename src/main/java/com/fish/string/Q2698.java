@@ -1,4 +1,4 @@
-package com.fish;
+package com.fish.string;
 
 import org.junit.jupiter.api.Test;
 
