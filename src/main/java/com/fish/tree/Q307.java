@@ -9,11 +9,13 @@ public class Q307 {
     class NumArray {
         private int[] tree;
         private int[] nums;
+        int n;
 
         public NumArray(int[] nums) {
-            this.tree = new int[nums.length + 1];
+            this.n = nums.length;
             this.nums = nums;
-            for (int i = 0; i < nums.length; i++) {
+            this.tree = new int[n + 1];
+            for (int i = 0; i < n; i++) {
                 add(i + 1, nums[i]);
             }
         }
@@ -24,6 +26,7 @@ public class Q307 {
         }
 
         public int sumRange(int left, int right) {
+            // prefixSum(right+1)右端点为nums[right]，prefixSum(left)右端点为nums[left]左边的节点
             return prefixSum(right + 1) - prefixSum(left);
         }
 
@@ -32,19 +35,19 @@ public class Q307 {
         }
 
         private void add(int index, int val) {
-            while (index < tree.length) {
+            while (index <= n) {
                 tree[index] += val;
                 index += lowBit(index);
             }
         }
 
         private int prefixSum(int index) {
-            int sum = 0;
+            int ans = 0;
             while (index > 0) {
-                sum += tree[index];
+                ans += tree[index];
                 index -= lowBit(index);
             }
-            return sum;
+            return ans;
         }
     }
 
@@ -139,11 +142,4 @@ public class Q307 {
             return sum;
         }
     }
-
-/**
- * Your NumArray object will be instantiated and called as such:
- * NumArray obj = new NumArray(nums);
- * obj.update(index,val);
- * int param_2 = obj.sumRange(left,right);
- */
 }
