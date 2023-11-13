@@ -5,38 +5,112 @@ package com.fish.tree;
  * @date 2023/11/13
  */
 public class Q307 {
-    class NumArray {
 
-        int[] nums;
-        int[] pre;
-        int start;
+    class NumArray {
+        private int[] tree;
+        private int[] nums;
 
         public NumArray(int[] nums) {
+            this.tree = new int[nums.length + 1];
             this.nums = nums;
-            this.pre = new int[nums.length];
-            int sum = 0;
             for (int i = 0; i < nums.length; i++) {
-                sum += nums[i];
-                pre[i] = sum;
+                add(i + 1, nums[i]);
             }
-            start = nums.length;
         }
 
         public void update(int index, int val) {
+            add(index + 1, val - nums[index]);
             nums[index] = val;
-            start = Math.min(start, index);
         }
 
         public int sumRange(int left, int right) {
-            if (start == 0) {
-                start = 1;
-                pre[0] = nums[0];
+            return prefixSum(right + 1) - prefixSum(left);
+        }
+
+        private int lowBit(int x) {
+            return x & -x;
+        }
+
+        private void add(int index, int val) {
+            while (index < tree.length) {
+                tree[index] += val;
+                index += lowBit(index);
             }
-            for (int i = start; i < nums.length; i++) {
-                pre[i] = pre[i - 1] + nums[i];
+        }
+
+        private int prefixSum(int index) {
+            int sum = 0;
+            while (index > 0) {
+                sum += tree[index];
+                index -= lowBit(index);
             }
-            start = nums.length;
-            return pre[right] - pre[left] + nums[left];
+            return sum;
+        }
+    }
+
+
+    /**
+     * 线段树解法
+     */
+    class NumArray2 {
+        int[] nums;
+        int[] d;
+        int n;
+
+        public NumArray2(int[] nums) {
+            this.nums = nums;
+            this.n = nums.length;
+            this.d = new int[(int) Math.pow(2, Math.ceil(Math.log(nums.length) / Math.log(2)) + 1)];
+            build(0, n - 1, 1);
+        }
+
+        public void build(int s, int t, int p) {
+            if (s == t) {
+                d[p] = nums[s];
+                return;
+            }
+            int mid = s + ((t - s) >> 1);
+            build(s, mid, 2 * p);
+            build(mid + 1, t, 2 * p + 1);
+            d[p] = d[2 * p] + d[2 * p + 1];
+        }
+
+        public int getSum(int l, int r, int s, int t, int p) {
+            if (l <= s && t <= r) {
+                return d[p];
+            }
+            int mid = s + ((t - s) >> 1);
+            int sum = 0;
+            if (l <= mid) {
+                sum += getSum(l, r, s, mid, 2 * p);
+            }
+            if (r > mid) {
+                sum += getSum(l, r, mid + 1, t, 2 * p + 1);
+            }
+            return sum;
+        }
+
+        public void update(int index, int val) {
+            updateHelp(index, val - nums[index], 0, n - 1, 1);
+        }
+
+        public void updateHelp(int index, int c, int s, int t, int p) {
+            if (s == t) {
+                d[p] += c;
+                nums[index] += c;
+                return;
+            }
+            int mid = s + ((t - s) >> 1);
+            if (index <= mid) {
+                updateHelp(index, c, s, mid, 2 * p);
+            } else {
+                updateHelp(index, c, mid + 1, t, 2 * p + 1);
+            }
+            d[p] += c;
+        }
+
+        public int sumRange(int left, int right) {
+            return getSum(left, right, 0, n - 1, 1);
         }
     }
 

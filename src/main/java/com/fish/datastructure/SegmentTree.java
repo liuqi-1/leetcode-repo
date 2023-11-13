@@ -1,16 +1,23 @@
 package com.fish.datastructure;
 
+import java.util.Arrays;
+
 /**
  * @author liuqi
  * @date 2023/11/13
- * 线段树
+ * 建立线段树和查询线段树，不包含更新线段树
  */
 public class SegmentTree {
-    int[] a = new int[]{10, 11, 12, 13, 14};
-    int[] d;
+    int[] a;// 下标从0开始，线段树区间也是从0开始
+    int[] d; // 下标从1开始，下标0无用
+    int n;
 
-    public SegmentTree() {
-
+    public SegmentTree(int[] a) {
+        this.a = a;
+        this.n = a.length;
+        // 用对数换底公式初始化d数组
+        this.d = new int[(int) (Math.pow(2, Math.ceil(Math.log(9) / Math.log(2)) + 1))];
+        build(0, n - 1, 1);
     }
 
 
@@ -57,5 +64,13 @@ public class SegmentTree {
         build(m + 1, t, 2 * p + 1);
         // 更新当前区间的值
         d[p] = d[2 * p] + d[2 * p + 1];
+    }
+
+    public static void main(String[] args) {
+        int[] arr = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9};
+        SegmentTree tree = new SegmentTree(arr);
+        int sum = tree.getSum(6, 7, 0, arr.length - 1, 1);
+        System.out.println(Arrays.toString(arr));
+        System.out.println(sum);
     }
 }
