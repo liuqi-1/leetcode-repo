@@ -11,6 +11,49 @@ import java.util.stream.Collectors;
  */
 public class Q15 {
     /**
+     * 20231120重做，这和恩算有啥区别，呜呜
+     */
+    class Solution3 {
+        public List<List<Integer>> nSum(int[] nums, int sPos, int n, int target) {
+            if (n == 1) {
+                List<List<Integer>> ans = new LinkedList<>();
+                while (sPos < nums.length) {
+                    if (nums[sPos] == target) {
+                        List<Integer> list = new LinkedList<>();
+                        list.add(nums[sPos]);
+                        ans.add(list);
+                    }
+                    sPos++;
+                    while (sPos < nums.length && nums[sPos] == nums[sPos - 1]) {
+                        sPos++;
+                    }
+                }
+                return ans;
+            } else {
+                List<List<Integer>> ans = new ArrayList<>();
+                while (sPos < nums.length) {
+                    List<List<Integer>> ret = nSum(nums, sPos + 1, n - 1, target - nums[sPos]);
+                    for (List<Integer> list : ret) {
+                        list.add(nums[sPos]);
+                        ans.add(list);
+                    }
+                    sPos++;
+                    while (sPos < nums.length && nums[sPos] == nums[sPos - 1]) {
+                        sPos++;
+                    }
+                }
+                return ans;
+            }
+        }
+
+        public List<List<Integer>> threeSum(int[] nums) {
+            Arrays.sort(nums);
+            return nSum(nums, 0, 3, 0);
+        }
+    }
+
+
+    /**
      * 恩算，超出时间限制
      */
     class Solution1 {
@@ -49,7 +92,7 @@ public class Q15 {
     /**
      * n数之和通用解法
      */
-    class Solution {
+    class Solution2 {
         public List<List<Integer>> threeSum(int[] nums) {
             // 多少个数字的和
             int n = 3;
@@ -132,11 +175,11 @@ public class Q15 {
 
     @Test
     public void test() {
-        new Solution().threeSum(new int[]{-1, 0, 1, 2, -1, -4}).forEach(e -> {
-            for (Integer integer : e) {
-                System.out.print(integer + "  ");
-            }
-            System.out.println();
-        });
+        // new Solution().threeSum(new int[]{-1, 0, 1, 2, -1, -4}).forEach(e -> {
+        //     for (Integer integer : e) {
+        //         System.out.print(integer + "  ");
+        //     }
+        //     System.out.println();
+        // });
     }
 }
