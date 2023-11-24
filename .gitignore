@@ -2,3 +2,4 @@
 /java/target/
 
 /python/.idea/
+**/__init__.py
