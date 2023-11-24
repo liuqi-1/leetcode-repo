@@ -40,4 +40,7 @@ head.val = 1
 head.next = ListNode()
 head.next.val = 2
 
-Solution().rotateRight(head, 2)
+ret = Solution().rotateRight(head, 2)
+while ret is not None:
+    print(ret.val)
+    ret = ret.next
